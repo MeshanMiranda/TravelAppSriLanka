@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "266263528880",
-    "project_id": "travel-9c15f",
-    "storage_bucket": "travel-9c15f.firebasestorage.app"
+    "project_number": "4789539827",
+    "firebase_url": "https://travel-aab92-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "travel-aab92",
+    "storage_bucket": "travel-aab92.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:266263528880:android:1abd325ee4a5a242c2c275",
+        "mobilesdk_app_id": "1:4789539827:android:16f56c85f7a68010687886",
         "android_client_info": {
           "package_name": "com.example.travel"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBo-IQ5aECq0sqTJ-1khy6UBQTJ-F9DtWg"
+          "current_key": "AIzaSyBkv-T2LwPt5ZLiBFCPsi4jl7Es84-aNf0"
         }
       ],
       "services": {
