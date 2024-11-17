@@ -1,6 +1,8 @@
 package com.example.travel.Domain;
 
-public class ItemDomain {
+import java.io.Serializable;
+
+public class ItemDomain implements Serializable {
     private String title;
     private String address;
     private String description;
