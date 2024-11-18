@@ -270,6 +270,7 @@
                                     android:textColor="@color/darkBlue"
                                     android:textStyle="bold"
                                     app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.58"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -340,7 +341,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/blue_bg"
-            android:text="Add to cart"
+            android:text="Get Ticket"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

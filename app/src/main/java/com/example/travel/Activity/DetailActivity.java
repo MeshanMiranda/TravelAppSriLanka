@@ -48,7 +48,9 @@ public class DetailActivity extends BaseActivity {
         binding.addToCartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(DetailActivity.this, TicketActivity.class);
+                intent.putExtra("object", object);
+                startActivity(intent);
             }
         });
     }
