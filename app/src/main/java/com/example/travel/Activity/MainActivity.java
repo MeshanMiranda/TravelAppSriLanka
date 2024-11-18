@@ -1,5 +1,7 @@
 package com.example.travel.Activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.example.travel.Domain.Location;
 import com.example.travel.Domain.SliderItems;
 import com.example.travel.R;
 import com.example.travel.databinding.ActivityMainBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +34,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
+    private ItemDomain object;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,38 @@ public class MainActivity extends BaseActivity {
         initCategory();
         initRecommended();
         initPopular();
+        profilePage();
+    }
+
+    private void profilePage() {
+        // Initialize ChipNavigationBar
+        // Initialize ChipNavigationBar
+        binding.bottomNavigation.setOnItemSelectedListener(itemId -> {
+            if (itemId == R.id.profileBottom) {
+                // Navigate to ProfileActivity
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+            if (itemId == R.id.browse) {
+                // Navigate to a URL
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thrillophilia.com/places-to-visit-in-sri-lanka"));
+                startActivity(intent);
+            }
+
+        });
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Deselect all items or set a default item when coming back to MainActivity
+        binding.bottomNavigation.setItemSelected(R.id.explorer, true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null; // Clean up the binding reference
     }
 
     private void initPopular() {
@@ -185,4 +224,5 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
 }

@@ -8,8 +8,9 @@
     app:cnb_backgroundColor="@color/blue"
     app:cnb_iconColor="@color/white"
     />
+
     <item
-        android:id="@+id/favorites"
+        android:id="@+id/browse"
         android:icon="@drawable/bottom_btn2"
         android:title="Explorer"
         app:cnb_backgroundColor="@color/blue"
@@ -23,7 +24,7 @@
         app:cnb_iconColor="@color/white"
         />
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileBottom"
         android:icon="@drawable/bottom_btn4"
         android:title="Profile"
         app:cnb_backgroundColor="@color/blue"
