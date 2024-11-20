@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,19 +24,20 @@ import com.example.travel.Domain.Location;
 import com.example.travel.Domain.SliderItems;
 import com.example.travel.R;
 import com.example.travel.databinding.ActivityMainBinding;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
-    private ItemDomain object;
-
+    private boolean isFirstClick = true;
 
 
     @Override
@@ -53,15 +55,18 @@ public class MainActivity extends BaseActivity {
     }
 
     private void profilePage() {
-        // Initialize ChipNavigationBar
-        // Initialize ChipNavigationBar
         binding.bottomNavigation.setOnItemSelectedListener(itemId -> {
             if (itemId == R.id.profileBottom) {
-                // Navigate to ProfileActivity
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
+                if (isFirstClick) {
+                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    isFirstClick = false;
+                } else {
+                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                    startActivity(intent);
+                }
             }
-            if (itemId == R.id.browse) {
+            else if (itemId == R.id.browse) {
                 // Navigate to a URL
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thrillophilia.com/places-to-visit-in-sri-lanka"));
                 startActivity(intent);
@@ -73,14 +78,13 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Deselect all items or set a default item when coming back to MainActivity
         binding.bottomNavigation.setItemSelected(R.id.explorer, true);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        binding = null; // Clean up the binding reference
+        binding = null;
     }
 
     private void initPopular() {
@@ -134,7 +138,8 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                binding.progressBarRecommended.setVisibility(View.GONE);
+                Toast.makeText(MainActivity.this, "Failed to load data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +23,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
     ArrayList<ItemDomain> items;
     Context context;
     ViewholderPopularBinding binding;
+    private String selectedCurrency = "LKR"; // Default currency
 
     public PopularAdapter(ArrayList<ItemDomain> items) {
         this.items = items;
@@ -31,13 +34,20 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
     public PopularAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         binding = ViewholderPopularBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         context = parent.getContext();
+
+        // Retrieve the selected currency from SharedPreferences
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        selectedCurrency = prefs.getString("selected_currency", "LKR");
+
         return new Viewholder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PopularAdapter.Viewholder holder, int position) {
+        ItemDomain currentItem = items.get(position);
+        updatePriceText(currentItem.getPrice());
         binding.titleTxt.setText(items.get(position).getTitle());
-        binding.priceTxt.setText("LKR " + items.get(position).getPrice());
+        //binding.priceTxt.setText("LKR " + items.get(position).getPrice());
         binding.addressTxt.setText(items.get(position).getAddress());
         binding.scoreTxt.setText("" + items.get(position).getScore());
 
@@ -58,6 +68,23 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    // Method to update the price text based on the selected currency
+    private void updatePriceText(double price) {
+        if ("USD".equals(selectedCurrency)) {
+            double priceInUSD = convertLKRtoUSD(price);
+            binding.priceTxt.setText("USD " + String.format("%.2f", priceInUSD));
+        } else {
+            // Default is LKR if no conversion is needed
+            binding.priceTxt.setText("LKR " + price);
+        }
+    }
+
+    // Placeholder method for LKR to USD conversion
+    private double convertLKRtoUSD(double lkrPrice) {
+        double exchangeRate = 0.0031; // Example conversion rate from LKR to USD
+        return lkrPrice * exchangeRate;
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

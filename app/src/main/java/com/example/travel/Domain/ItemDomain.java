@@ -14,6 +14,7 @@ public class ItemDomain implements Serializable {
     private String tourGuidePhone;
     private String tourGuidePic;
     private int price ;
+    private float priceUSD ;
     private int bed;
     private String distance;
     private double score;
@@ -107,6 +108,13 @@ public class ItemDomain implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+    public float getPriceUSD() {
+        return priceUSD;
+    }
+
+    public void setPriceUSD(float priceUSD) {
+        this.priceUSD = priceUSD;
     }
 
     public int getBed() {

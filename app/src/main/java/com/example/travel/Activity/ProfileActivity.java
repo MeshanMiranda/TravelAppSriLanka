@@ -68,7 +68,7 @@ public class ProfileActivity extends BaseActivity {
                 task.getResult(ApiException.class);
                 navigateToSecondActivity();
             } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(), "Somethinf went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }
     }

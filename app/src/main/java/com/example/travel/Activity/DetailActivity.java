@@ -1,7 +1,10 @@
 package com.example.travel.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +21,7 @@ import com.example.travel.databinding.ActivityDetailBinding;
 public class DetailActivity extends BaseActivity {
     ActivityDetailBinding binding;
     private ItemDomain object;
+    private String selectedCurrency = "LKR";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +33,22 @@ public class DetailActivity extends BaseActivity {
         setVariable();
     }
 
+    private void getIntentExtra() {
+        object = (ItemDomain) getIntent().getSerializableExtra("object");
+
+        // Retrieve the currency from Intent or SharedPreferences, default to LKR
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String currencyFromIntent = getIntent().getStringExtra("currency");
+
+        // Use the currency from Intent if available, otherwise use SharedPreferences
+        selectedCurrency = (currencyFromIntent != null) ? currencyFromIntent : prefs.getString("selected_currency", "LKR");
+    }
+
     private void setVariable() {
+        updatePrice();
         binding.titleTxt.setText(object.getTitle());
-        binding.priceTxt.setText("LKR "+ object.getPrice());
         binding.backBtn.setOnClickListener(v -> finish());
-        binding.bedTxt.setText("" + object.getBed());
+        binding.bedTxt.setText(String.valueOf(object.getBed()));
         binding.durationTxt.setText(object.getDuration());
         binding.distanceTxt.setText(object.getDistance());
         binding.descriptionTxt.setText(object.getDescription());
@@ -45,17 +60,26 @@ public class DetailActivity extends BaseActivity {
                 .load(object.getPic())
                 .into(binding.pic);
 
-        binding.addToCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DetailActivity.this, TicketActivity.class);
-                intent.putExtra("object", object);
-                startActivity(intent);
-            }
+        binding.addToCartBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(DetailActivity.this, TicketActivity.class);
+            intent.putExtra("object", object);
+            startActivity(intent);
         });
     }
 
-    private void getIntentExtra() {
-        object = (ItemDomain) getIntent().getSerializableExtra("object");
+    private void updatePrice() {
+        double price = object.getPrice();
+        if ("USD".equals(selectedCurrency)) {
+            price = convert(price);  // Renamed method to convert
+            binding.priceTxt.setText("USD " + String.format("%.2f", price));
+        } else {
+            binding.priceTxt.setText("LKR " + price);
+        }
+    }
+
+    private double convert(double lkrPrice) {
+        final double exchangeRate = 0.0031;
+        return lkrPrice * exchangeRate;
     }
 }
+

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,6 +63,12 @@ public class TicketActivity extends BaseActivity {
                 String phone = object.getTourGuidePhone();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
                 startActivity(intent);
+            }
+        });
+        binding.downloadTicketBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TicketActivity.this, "You need to Sign in first.", Toast.LENGTH_SHORT).show();
             }
         });
 
