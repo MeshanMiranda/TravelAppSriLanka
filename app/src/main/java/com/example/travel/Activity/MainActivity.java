@@ -57,6 +57,7 @@ public class MainActivity extends BaseActivity {
 
         BottomMenu();
         userSignedImage();
+        Notification();
     }
 
     @Override
@@ -224,6 +225,10 @@ public class MainActivity extends BaseActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thrillophilia.com/places-to-visit-in-sri-lanka"));
                 startActivity(intent);
             }
+            else if (itemId == R.id.bookmark) {
+                Intent intent = new Intent(MainActivity.this, BookmarkActivity.class);
+                startActivity(intent);
+            }
         });
 
     }
@@ -242,5 +247,15 @@ public class MainActivity extends BaseActivity {
             NotSignin.setVisibility(View.VISIBLE);
             Signed.setVisibility(View.GONE);
         }
+    }
+
+    private void Notification() {
+        binding.notificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
