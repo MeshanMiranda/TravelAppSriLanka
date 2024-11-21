@@ -36,11 +36,9 @@ public class DetailActivity extends BaseActivity {
     private void getIntentExtra() {
         object = (ItemDomain) getIntent().getSerializableExtra("object");
 
-        // Retrieve the currency from Intent or SharedPreferences, default to LKR
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String currencyFromIntent = getIntent().getStringExtra("currency");
 
-        // Use the currency from Intent if available, otherwise use SharedPreferences
         selectedCurrency = (currencyFromIntent != null) ? currencyFromIntent : prefs.getString("selected_currency", "LKR");
     }
 
@@ -70,16 +68,17 @@ public class DetailActivity extends BaseActivity {
     private void updatePrice() {
         double price = object.getPrice();
         if ("USD".equals(selectedCurrency)) {
-            price = convert(price);  // Renamed method to convert
+            price = convert(price);
             binding.priceTxt.setText("USD " + String.format("%.2f", price));
         } else {
-            binding.priceTxt.setText("LKR " + price);
+            binding.priceTxt.setText("LKR " + String.format("%.0f", price));
         }
     }
 
     private double convert(double lkrPrice) {
-        final double exchangeRate = 0.0031;
+        double exchangeRate = 0.0034; // LKR to USD
         return lkrPrice * exchangeRate;
     }
+
 }
 

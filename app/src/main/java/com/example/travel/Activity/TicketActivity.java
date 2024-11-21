@@ -29,7 +29,6 @@ public class TicketActivity extends BaseActivity {
 
         getIntentExtra();
         setVariable();
-
     }
 
     private void setVariable() {

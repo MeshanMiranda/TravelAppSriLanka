@@ -1,11 +1,16 @@
 package com.example.travel.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,8 +42,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
     ActivityMainBinding binding;
-    private boolean isFirstClick = true;
-
+    private Handler sliderHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,35 +50,15 @@ public class MainActivity extends BaseActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        initLocation();
         initBanner();
         initCategory();
         initRecommended();
         initPopular();
-        profilePage();
+
+        BottomMenu();
+        userSignedImage();
     }
 
-    private void profilePage() {
-        binding.bottomNavigation.setOnItemSelectedListener(itemId -> {
-            if (itemId == R.id.profileBottom) {
-                if (isFirstClick) {
-                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                    startActivity(intent);
-                    isFirstClick = false;
-                } else {
-                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    startActivity(intent);
-                }
-            }
-            else if (itemId == R.id.browse) {
-                // Navigate to a URL
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thrillophilia.com/places-to-visit-in-sri-lanka"));
-                startActivity(intent);
-            }
-
-        });
-
-    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -85,6 +69,7 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         binding = null;
+        sliderHandler.removeCallbacksAndMessages(null);
     }
 
     private void initPopular() {
@@ -173,31 +158,9 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void initLocation() {
-        DatabaseReference myRef = database.getReference("Location");
-        ArrayList<Location> list = new ArrayList<>();
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    for (DataSnapshot issue:snapshot.getChildren()) {
-                        list.add(issue.getValue(Location.class));
-                    }
-                    ArrayAdapter<Location> adapter = new ArrayAdapter<>(MainActivity.this, R.layout.sp_item, list);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.locationSp.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", error.getMessage());
-            }
-
-        });
-    }
     private void banners(ArrayList<SliderItems> items) {
-        binding.viewPagerSlider.setAdapter(new SliderAdapter(items,binding.viewPagerSlider));
+        SliderAdapter adapter = new SliderAdapter(items, binding.viewPagerSlider);
+        binding.viewPagerSlider.setAdapter(adapter);
         binding.viewPagerSlider.setClipToPadding(false);
         binding.viewPagerSlider.setClipChildren(false);
         binding.viewPagerSlider.setOffscreenPageLimit(3);
@@ -206,7 +169,11 @@ public class MainActivity extends BaseActivity {
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(40));
         binding.viewPagerSlider.setPageTransformer(compositePageTransformer);
+
+        // Start auto-scroll
+        startAutoScroll();
     }
+
     private void initBanner() {
         DatabaseReference myRef = database.getReference("Banner");
         binding.progressBarBanner.setVisibility(View.VISIBLE);
@@ -230,4 +197,50 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    private void startAutoScroll() {
+        sliderHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int currentItem = binding.viewPagerSlider.getCurrentItem();
+                int nextItem = currentItem + 1;
+
+                if (nextItem >= binding.viewPagerSlider.getAdapter().getItemCount()) {
+                    nextItem = 0;
+                }
+
+                binding.viewPagerSlider.setCurrentItem(nextItem, true);
+                sliderHandler.postDelayed(this, 4000);
+            }
+        }, 4000);
+    }
+
+    private void BottomMenu() {
+        binding.bottomNavigation.setOnItemSelectedListener(itemId -> {
+            if (itemId == R.id.profileBottom) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+
+            } else if (itemId == R.id.browse) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.thrillophilia.com/places-to-visit-in-sri-lanka"));
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void userSignedImage() {
+        ImageView NotSignin = findViewById(R.id.imageView7);
+        ImageView Signed = findViewById(R.id.imageView10);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("userPrefs", MODE_PRIVATE);
+        boolean isSignedIn = sharedPreferences.getBoolean("isSignedIn", false);
+
+        if (isSignedIn) {
+            NotSignin.setVisibility(View.GONE);
+            Signed.setVisibility(View.VISIBLE);
+        } else {
+            NotSignin.setVisibility(View.VISIBLE);
+            Signed.setVisibility(View.GONE);
+        }
+    }
 }

@@ -70,10 +70,9 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
         return items.size();
     }
 
-    // Method to update the price text based on the selected currency
-    private void updatePriceText(double price) {
+    private void updatePriceText(int price) {
         if ("USD".equals(selectedCurrency)) {
-            double priceInUSD = convertLKRtoUSD(price);
+            double priceInUSD = convertLKRtoUSD((int) price);
             binding.priceTxt.setText("USD " + String.format("%.2f", priceInUSD));
         } else {
             // Default is LKR if no conversion is needed
@@ -81,9 +80,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
         }
     }
 
-    // Placeholder method for LKR to USD conversion
-    private double convertLKRtoUSD(double lkrPrice) {
-        double exchangeRate = 0.0031; // Example conversion rate from LKR to USD
+    private double convertLKRtoUSD(int lkrPrice) {
+        double exchangeRate = 0.0034; //LKR to USD
         return lkrPrice * exchangeRate;
     }
 
