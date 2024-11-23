@@ -25,6 +25,7 @@ public class NotificationActivity extends BaseActivity {
         setContentView(binding.getRoot());
 
         binding.progressBarNotification.setVisibility(View.VISIBLE);
+        binding.backBtn.setOnClickListener(v -> finish());
 
         BottomMenu();
     }
