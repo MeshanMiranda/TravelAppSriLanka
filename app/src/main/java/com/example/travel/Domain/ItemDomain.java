@@ -7,7 +7,7 @@ public class ItemDomain implements Serializable {
     private String address;
     private String description;
     private String pic;
-    private String duration;
+    private String direction;
     private String timeTour;
     private String dateTour;
     private String tourGuideName;
@@ -18,6 +18,7 @@ public class ItemDomain implements Serializable {
     private int bed;
     private String distance;
     private double score;
+    private String id;
 
     public ItemDomain() {
     }
@@ -54,12 +55,12 @@ public class ItemDomain implements Serializable {
         this.pic = pic;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getDirection() {
+        return direction;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setDirection(String duration) {
+        this.direction = direction;
     }
 
     public String getTimeTour() {
@@ -139,5 +140,10 @@ public class ItemDomain implements Serializable {
 
     public void setScore(double score) {
         this.score = score;
+    }
+
+    public String getId() {
+        return id;
+
     }
 }

@@ -3,4 +3,10 @@
     <string name="introTitle"><font color='#08A045'>Welcome</font>\n to Sri Lanka</string>
     //3f95ec
     <string name="subIntro">See what is waiting for you on your next island getaway. Savour the unique experiences this island treasure has to offer</string>
+    <string name="no_direction_available">No direction available</string>
+    <string name="direction">Direction</string>
+    <string name="error_loading_direction">Error loading direction</string>
+    <string name="no_weather_data" />
+    <string name="error_loading_weather" />
+    <string name="no_temp_data" />
 </resources>

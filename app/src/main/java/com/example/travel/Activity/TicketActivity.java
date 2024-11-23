@@ -42,7 +42,6 @@ public class TicketActivity extends BaseActivity {
 
         binding.titleTxt.setText(object.getTitle());
         binding.backBtn.setOnClickListener(v -> finish());
-        binding.durationTxt.setText(object.getDuration());
         binding.tourGuideTxt.setText(object.getDateTour());
         binding.timeTxt.setText(object.getTimeTour());
         binding.tourGuideNameTxt.setText(object.getTourGuideName());

@@ -178,7 +178,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/tourGuideTxt" />
 
                         <TextView
-                            android:id="@+id/durationTxt"
+                            android:id="@+id/directionTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -206,7 +206,7 @@
                             android:textColor="@color/darkBlue"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@+id/textView24"
-                            app:layout_constraintTop_toTopOf="@+id/durationTxt" />
+                            app:layout_constraintTop_toTopOf="@+id/directionTxt" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout

@@ -160,43 +160,36 @@
                                 android:layout_margin="8dp" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/direction"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.333">
 
                                 <TextView
-                                    android:id="@+id/durationTxt"
+                                    android:id="@+id/directionTxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="16dp"
-                                    android:text="- min"
+                                    android:layout_marginBottom="16dp"
+                                    android:text="Direction"
                                     android:textColor="@color/darkBlue"
                                     android:textStyle="bold"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:linksClickable="true"
+                                    app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.57"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintStart_toStartOf="parent" />
 
                                 <ImageView
                                     android:id="@+id/imageView101"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="8dp"
-                                    app:layout_constraintBottom_toBottomOf="@+id/durationTxt"
-                                    app:layout_constraintEnd_toStartOf="@+id/durationTxt"
-                                    app:layout_constraintTop_toTopOf="@+id/durationTxt"
-                                    app:srcCompat="@drawable/hourglass" />
-
-                                <TextView
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="8dp"
-                                    android:text="Duration"
-                                    android:textColor="@color/darkBlue"
+                                    android:layout_marginBottom="8dp"
+                                    app:layout_constraintBottom_toTopOf="@+id/directionTxt"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/imageView101" />
+                                    app:srcCompat="@drawable/baseline_directions_24" />
+
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -262,38 +255,41 @@
                                 android:layout_weight="0.333">
 
                                 <TextView
-                                    android:id="@+id/bedTxt"
+                                    android:id="@+id/weatherTxt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="16dp"
+                                    android:text="Weather"
+                                    android:textColor="@color/darkBlue"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.509"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                                <ImageView
+                                    android:id="@+id/weatherIcon"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="16dp"
-                                    android:text="0"
-                                    android:textColor="@color/darkBlue"
-                                    android:textStyle="bold"
+                                    android:layout_marginEnd="32dp"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.58"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <ImageView
-                                    android:id="@+id/imageView103"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="8dp"
-                                    app:layout_constraintBottom_toBottomOf="@+id/bedTxt"
-                                    app:layout_constraintEnd_toStartOf="@+id/bedTxt"
-                                    app:layout_constraintTop_toTopOf="@+id/bedTxt"
-                                    app:srcCompat="@drawable/bed" />
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/baseline_cloudy_snowing_24" />
 
                                 <TextView
-
+                                    android:id="@+id/celciusTxt"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="8dp"
-                                    android:text="Bed"
-                                    android:textColor="@color/darkBlue"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginEnd="24dp"
+                                    android:text="27"
+                                    android:textColor="@color/black"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/imageView103" />
+                                    app:layout_constraintHorizontal_bias="1.0"
+                                    app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </LinearLayout>
