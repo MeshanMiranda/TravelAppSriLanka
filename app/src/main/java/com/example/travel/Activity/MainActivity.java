@@ -174,7 +174,6 @@ public class MainActivity extends BaseActivity {
         // Start auto-scroll
         startAutoScroll();
     }
-
     private void initBanner() {
         DatabaseReference myRef = database.getReference("Banner");
         binding.progressBarBanner.setVisibility(View.VISIBLE);
@@ -197,7 +196,6 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
     private void startAutoScroll() {
         sliderHandler.postDelayed(new Runnable() {
             @Override
