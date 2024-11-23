@@ -26,6 +26,7 @@ public class BookmarkActivity extends BaseActivity {
         binding.bottomNavigation.setItemSelected(R.id.bookmark, true);
 
         binding.progressBarBookmark.setVisibility(View.VISIBLE);
+        binding.backBtn.setOnClickListener(v -> finish());
 
         BottomMenu();
 
