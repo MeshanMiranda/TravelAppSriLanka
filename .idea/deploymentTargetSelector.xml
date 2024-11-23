@@ -4,6 +4,12 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
+<<<<<<< Updated upstream
+=======
+      </SelectionState>
+      <SelectionState runConfigName="DetailActivity">
+        <option name="selectionMode" value="DROPDOWN" />
+>>>>>>> Stashed changes
       </SelectionState>
     </selectionStates>
   </component>
