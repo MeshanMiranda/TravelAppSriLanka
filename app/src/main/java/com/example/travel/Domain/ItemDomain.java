@@ -13,6 +13,7 @@ public class ItemDomain implements Serializable {
     private String tourGuideName;
     private String tourGuidePhone;
     private String tourGuidePic;
+    private String duration;
     private int price ;
     private float priceUSD ;
     private int bed;
@@ -116,6 +117,14 @@ public class ItemDomain implements Serializable {
 
     public void setPriceUSD(float priceUSD) {
         this.priceUSD = priceUSD;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public int getBed() {

@@ -53,7 +53,7 @@
                 android:text="@string/introTitle"
                 android:textAlignment="center"
                 android:textColor="@color/darkBlue"
-                android:textSize="43sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <TextView

@@ -101,7 +101,7 @@ public class DetailActivity extends BaseActivity {
 
 
             binding.addToCartBtn.setOnClickListener(v -> {
-                Intent intent = new Intent(DetailActivity.this, TicketActivity.class);
+                Intent intent = new Intent(DetailActivity.this, PaymentActivity.class);
                 intent.putExtra("object", object);
                 startActivity(intent);
             });
@@ -142,10 +142,6 @@ public class DetailActivity extends BaseActivity {
         }
     }
 
-
-
-
-
     private void updatePrice() {
             double price = object.getPrice();
             if ("USD".equals(selectedCurrency)) {
@@ -156,10 +152,10 @@ public class DetailActivity extends BaseActivity {
             }
         }
 
-        private double convert(double lkrPrice){
-            double exchangeRate = 0.0034; // LKR to USD
-            return lkrPrice * exchangeRate;
-        }
+    private double convert(double lkrPrice){
+        double exchangeRate = 0.0034; // LKR to USD
+        return lkrPrice * exchangeRate;
+    }
 
 }
 

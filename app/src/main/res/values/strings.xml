@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Travel Sri</string>
-    <string name="introTitle"><font color='#08A045'>Welcome</font>\n to Sri Lanka</string>
-    //3f95ec
+    <string name="introTitle"><font color='#08A045'>Explore</font>\n Sri Lanka\'s Wonders</string>
     <string name="subIntro">See what is waiting for you on your next island getaway. Savour the unique experiences this island treasure has to offer</string>
     <string name="no_direction_available">No direction available</string>
     <string name="direction">Direction</string>

@@ -208,9 +208,9 @@ public class MainActivity extends BaseActivity {
                 }
 
                 binding.viewPagerSlider.setCurrentItem(nextItem, true);
-                sliderHandler.postDelayed(this, 4000);
+                sliderHandler.postDelayed(this, 5000);
             }
-        }, 4000);
+        }, 5000);
     }
 
     private void BottomMenu() {

@@ -41,6 +41,7 @@ public class TicketActivity extends BaseActivity {
                 .into(binding.profile);
 
         binding.titleTxt.setText(object.getTitle());
+        binding.durationTxt.setText(object.getDuration());
         binding.backBtn.setOnClickListener(v -> finish());
         binding.tourGuideTxt.setText(object.getDateTour());
         binding.timeTxt.setText(object.getTimeTour());
@@ -66,7 +67,7 @@ public class TicketActivity extends BaseActivity {
         binding.downloadTicketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TicketActivity.this, "You need to Sign in first.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TicketActivity.this, "Downloading...", Toast.LENGTH_SHORT).show();
             }
         });
 

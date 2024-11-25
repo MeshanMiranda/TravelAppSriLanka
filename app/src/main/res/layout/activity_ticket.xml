@@ -178,7 +178,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/tourGuideTxt" />
 
                         <TextView
-                            android:id="@+id/directionTxt"
+                            android:id="@+id/durationTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -202,11 +202,12 @@
                             android:id="@+id/guestTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:text="0"
                             android:textColor="@color/darkBlue"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@+id/textView24"
-                            app:layout_constraintTop_toTopOf="@+id/directionTxt" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView24" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
